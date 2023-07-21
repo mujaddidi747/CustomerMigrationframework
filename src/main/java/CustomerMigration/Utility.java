@@ -1,6 +1,7 @@
 package CustomerMigration;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.SelectOption;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -12,15 +13,19 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import static CustomerMigration.playwrightGenerics.page;
+
 public class Utility {
 
+    public static SelectOption setdropdown = new SelectOption();
     static Playwright playwright = Playwright.create();
+
     static Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
 
 
     static Workbook book;
     static Sheet sheet;
-    public static String TestData_Sheet_Path = "********";
+    public static String TestData_Sheet_Path = "";
 
 
 /*    Login login = new Login();*/
@@ -28,16 +33,28 @@ public class Utility {
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
 
-    public static void getActionsObject_submenu_homepage(ElementHandle submenu, ElementHandle submenu1) {
+    public static synchronized void getActionsObject_submenu_homepage(Locator submenu, Locator submenu1) throws InterruptedException {
 
-        submenu = (ElementHandle) PlaywrightGenerics.page.locator("//*[@id='pageWrap']/div[3]/ul[1]/span/span[6]/li/span");
+        //    submenu = page.locator("//*[@id=\"pageWrap\"]/div[3]/ul[1]/span/span[6]/li/span");
+        submenu = playwrightGenerics.page.locator("//*[@id=\"pageWrap\"]/div[3]/ul[1]/span/span[6]/li/span");
         submenu.hover();
 
-        submenu1 = (ElementHandle) PlaywrightGenerics.page.locator("//*[@id='pageWrap']/div[3]/ul[1]/span/span[6]/li/ul/span[1]/li/a/span");
-        submenu1.click();
 
+        //  submenu.selectOption(setDropdown.setLabel("CUSTOMER REGISTRATION"));
+
+        submenu1 = playwrightGenerics.page.locator("//*[@id=\"pageWrap\"]/div[3]/ul[1]/span/span[6]/li/ul/span[7]/li/a/span").last();
+
+        synchronized (playwright) {
+            if(submenu1.isEnabled())
+                submenu1.click();
+        }
 
     }
+
+
+
+
+
 
     public static String[] getSheetNames() {
 
@@ -109,7 +126,7 @@ public class Utility {
         int high = 10;
         int randomYear = numberCalendar.nextInt(high - low) + low;
         //System.out.println("randomYear: "+randomYear);
-        List<ElementHandle> elementsYear = (List<ElementHandle>) PlaywrightGenerics.page.locator("/html/body/div[2]/div/div/select[2]/option[" + randomYear + "]");
+        List<ElementHandle> elementsYear = (List<ElementHandle>) page.locator("/html/body/div[2]/div/div/select[2]/option[" + randomYear + "]");
         //System.out.print("a");
         //System.out.println(elementsYear.get(0).getText());
         elementsYear.get(0).click();
@@ -118,7 +135,7 @@ public class Utility {
         high = 12;
         int randomMonth = numberCalendar.nextInt(high - low) + low;
         //System.out.println("randomMonth: "+randomMonth);
-        List<ElementHandle> elements = (List<ElementHandle>)PlaywrightGenerics. page.locator("/html/body/div[2]/div/div/select[1]/option[" + randomMonth + "]");
+        List<ElementHandle> elements = (List<ElementHandle>) page.locator("/html/body/div[2]/div/div/select[1]/option[" + randomMonth + "]");
 
         for (int i = 0; i < elements.size(); i++) {
             //System.out.println(elements.get(i).getText());
@@ -137,7 +154,7 @@ public class Utility {
         int randomDateCol = numberCalendar.nextInt(high - low) + low;
         //System.out.println("randomDateCol: "+randomDateCol);
 
-        List<ElementHandle> days = (List<ElementHandle>) PlaywrightGenerics.page.locator("/html/body/div[2]/table/tbody/tr[" + randomDateRow + "]/td[" + randomDateCol + "]/a");
+        List<ElementHandle> days = (List<ElementHandle>) page.locator("/html/body/div[2]/table/tbody/tr[" + randomDateRow + "]/td[" + randomDateCol + "]/a");
 
         for (ElementHandle d : days) {
             //		System.out.println(d.getText());
@@ -149,51 +166,51 @@ public class Utility {
 
     public static void riskTypes(){
 
-        Locator AccountOrganizationType =  PlaywrightGenerics.page.locator("#id6e");
-        AccountOrganizationType.selectOption("Low Risk");
+        Locator AccountOrganizationType =page.locator("#id8b");
+        AccountOrganizationType.selectOption(setdropdown.setValue("Low Risk"));
 
-        Locator PoliticallyExposedPerson =  PlaywrightGenerics.page.locator("#id6f");
+        Locator PoliticallyExposedPerson =  page.locator("#id8d");
         PoliticallyExposedPerson.selectOption("Low Risk");
 
-        Locator CustomerOwnership =  PlaywrightGenerics.page.locator("#id70");
+        Locator CustomerOwnership =  page.locator("#id8f");
         CustomerOwnership.selectOption("Low Risk");
 
-        Locator CustomerRefuse = PlaywrightGenerics.page.locator("#id71");
+        Locator CustomerRefuse = page.locator("#id91");
         CustomerRefuse.selectOption("Low Risk");
 
-        Locator CustomerDealing = PlaywrightGenerics.page.locator("#id72");
+        Locator CustomerDealing = page.locator("#id93");
         CustomerDealing.selectOption("Low Risk");
 
-        Locator IsResident = PlaywrightGenerics.page.locator("#id73");
+        Locator IsResident = page.locator("#id95");
         IsResident.selectOption("Low Risk");
 
-        Locator IsActualOwner = PlaywrightGenerics.page.locator("#id74");
+        Locator IsActualOwner = page.locator("#id97");
         IsActualOwner.selectOption("Low Risk");
 
-        Locator IsCustomerDirector = PlaywrightGenerics.page.locator("#id75");
+        Locator IsCustomerDirector = page.locator("#id8c");
         IsCustomerDirector.selectOption("Low Risk");
 
-        Locator IsCustomerHouseWife = PlaywrightGenerics.page.locator("#id76");
+        Locator IsCustomerHouseWife = page.locator("#id8e");
         IsCustomerHouseWife.selectOption("Low Risk");
 
-        Locator IsMinorAccount = PlaywrightGenerics.page.locator("#id77");
+        Locator IsMinorAccount = page.locator("#id90");
         IsMinorAccount.click();
         IsMinorAccount.selectOption("High Risk");
 
-        Locator IsHighRiskBusiness = PlaywrightGenerics.page.locator("#id78");
+        Locator IsHighRiskBusiness = page.locator("#id92");
         IsHighRiskBusiness.selectOption("Low Risk");
 
-        Locator IsClientProfile = PlaywrightGenerics.page.locator("#id79");
+        Locator IsClientProfile = page.locator("#id94");
         IsClientProfile.selectOption("Low Risk");
 
-        Locator IsComplexStructure = PlaywrightGenerics.page.locator("#id7a");
+        Locator IsComplexStructure = page.locator("#id96");
         IsComplexStructure.selectOption("High Risk");
 
-        Locator IsMailInstruction = PlaywrightGenerics.page.locator("#id7b");
+        Locator IsMailInstruction = page.locator("#id98");
         IsMailInstruction.selectOption("High Risk");
 
         //RISK RATING
-        Locator RiskRating = PlaywrightGenerics.page.locator("#riskRating");
+        Locator RiskRating = page.locator("#riskRating");
         RiskRating.selectOption("Low Risk");
 
     }

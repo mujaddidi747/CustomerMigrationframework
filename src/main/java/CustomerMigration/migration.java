@@ -31,10 +31,15 @@ public class migration {
                                              String TaxIdentificationNumber, String newcustomerType) throws InterruptedException, IOException {
 
 
-        PlaywrightGenerics.page.locator("//*[@id='msisdn']").fill(accNumber);
-        // driver.findElement(By.id("displayName")).sendKeys("ajhabdc");
-        PlaywrightGenerics.page.locator("#id7").click();
-        PlaywrightGenerics.page.locator(("/html/body/div/div[3]/div[4]/div/div[2]/div/div/form/div[5]/div/table/tbody/tr/td[1]/a/div")).click();
+        playwrightGenerics.page.locator("//*[@id='msisdn']").fill(accNumber);
+
+        //*[@id="agentListTable"]/tbody/tr/td[1]/a/div
+
+        playwrightGenerics.page.locator("#id7").click();
+
+        playwrightGenerics.page.locator("//*[@id=\"agentListTable\"]/tbody/tr/td[1]/a/div").click();
+
+     //
 
         try {
             migrationCommons.commons(newcustomerType);
@@ -43,7 +48,7 @@ public class migration {
         }
 
 
-        PlaywrightGenerics.page.wait(1000);
+      //  playwrightGenerics.page.wait(1000);
 
         if (newcustomerType.equalsIgnoreCase("L2 Existing Customer")
                 || newcustomerType.equalsIgnoreCase("L2-Individual")
@@ -79,13 +84,14 @@ public class migration {
         ////////KIN DETAILS//////////
         ////////////////////////////
 
-        Locator PoliticalExposed = PlaywrightGenerics.page
-                .locator("kycDiv:politicallyExposedDiv:customer.kycDetailsBean.politicallyExposed.politicallyExposed");
-        PoliticalExposed.selectOption(setdropdown.setLabel(""));
+        Locator PoliticalExposed = playwrightGenerics.page
+                .locator("#id9c");
 
-        Locator accType = PlaywrightGenerics.page.locator("generalInformationDiv:accountTypeDiv:customer.address.typeOfAccount");
+        PoliticalExposed.selectOption(setdropdown.setLabel("No"));
+
+      /*  Locator accType = playwrightGenerics.page.locator("generalInformationDiv:accountTypeDiv:customer.address.typeOfAccount");
         accType.selectOption(setdropdown.setLabel(""));
-
+*/
         ////////////////////////////////
         ////////HARDCODED VALUES////////
         ////////////////////////////////
@@ -93,124 +99,125 @@ public class migration {
 
         //	driver.findElement(By.id("permanentCity")).sendKeys("LAHORE");
 
-        Locator permanentProvince = PlaywrightGenerics.page.locator
-                ("contactInfoDiv:addressDiv:permanentAddressDiv:customer.address.permanentState");
+        Locator permanentProvince = playwrightGenerics.page.locator
+                ("#permanentState");
 
-        permanentProvince.selectOption(setdropdown.setLabel(""));
+        permanentProvince.selectOption(setdropdown.setLabel("Sindh"));
 
-        PlaywrightGenerics.page.wait(5000);
+     //   playwrightGenerics.page.wait(5000);
 
-        PlaywrightGenerics.page.locator("#nextOfKinName").fill("");
-        PlaywrightGenerics.page.wait(2000);
-        PlaywrightGenerics.page.locator("#nextOfKinName").fill(Name);
+        playwrightGenerics.page.locator("#nextOfKinName").fill("");
+     //   playwrightGenerics.page.wait(2000);
+
+        playwrightGenerics.page.locator("#nextOfKinName").fill(Name);
         //	Assert.assertTrue(accountTitle.matches("^[a-zA-Z\\s]*$"));
 
-        PlaywrightGenerics.page.locator("#nextOfKinCnic").fill("");
-        PlaywrightGenerics.page.locator("#nextOfKinCnic").fill(CNIC);
+        playwrightGenerics.page.locator("#nextOfKinCnic").fill("");
+        playwrightGenerics.page.locator("#nextOfKinCnic").fill(CNIC);
         //Assert.assertTrue(CNIC.matches("^(?=.*[1-9])[0-9+]{5}(-){1}[0-9+]{7}(-){1}[0-9]{1}$"));
 
-        Locator nextofkinNationality = PlaywrightGenerics.page.locator("kycDiv:nextOfKinDiv:nextOfKinNationalityDiv:customer.kycDetailsBean.nextOfKin.nextOfKinNationality");
-        nextofkinNationality.selectOption(setdropdown.setLabel(""));
+        Locator nextofkinNationality = playwrightGenerics.page.locator("#nextOfKinNationality");
+        nextofkinNationality.selectOption(setdropdown.setLabel("AFGHANISTAN"));
 
-        PlaywrightGenerics.page.locator("#nextOfKinContactNo").fill("");
-        PlaywrightGenerics.page.locator("#nextOfKinContactNo").fill(contactNumber);
+        playwrightGenerics.page.locator("#nextOfKinContactNo").fill("");
+        playwrightGenerics.page.locator("#nextOfKinContactNo").fill(contactNumber);
 
-        PlaywrightGenerics.page.locator("#nextOfKinResidency").fill("");
-        PlaywrightGenerics.page.locator("#nextOfKinResidency").fill(residency);
+        playwrightGenerics.page.locator("#nextOfKinResidency").fill("");
+        playwrightGenerics.page.locator("#nextOfKinResidency").fill(residency);
 
-        PlaywrightGenerics.page.locator("#nextOfKinAddress").fill("");
-        PlaywrightGenerics.page.locator("#nextOfKinAddress").fill(address);
+        playwrightGenerics.page.locator("#nextOfKinAddress").fill("");
+        playwrightGenerics.page.locator("#nextOfKinAddress").fill(address);
         //Assert.assertTrue(address.matches("^[0-9]*|^[-0-9a-zA-ZÀ-ÿ .']*$"));
 
-        Locator Relationship = PlaywrightGenerics.page.
-                locator("kycDiv:nextOfKinDiv:nextOfKinRelationshipDiv:customer.kycDetailsBean.nextOfKin.nextOfKinRelationship");
-        Relationship.selectOption(setdropdown.setLabel("")); ////*[@id="ida3"]
+        Locator Relationship = playwrightGenerics.page.
+                locator("#id9d");
+        Relationship.selectOption(setdropdown.setLabel("Aunt")); ////*[@id="ida3"]
 
 
-        Locator OccupationType = PlaywrightGenerics.page.locator("kycDiv:occupationDetailsDiv:occupationTypeDiv:customer.kycDetailsBean.occupationDetail.occupationType");
+        Locator OccupationType = playwrightGenerics.page.locator("#id9e");
 
-        OccupationType.selectOption(setdropdown.setLabel(""));
+        OccupationType.selectOption(setdropdown.setLabel("Retired"));
 
         ///html/body/div[1]/div[3]/div[4]/div/div[2]/div/form/div[3]/div[6]/div[3]/div[1]/div[1]/select
-        for (int x = 0; x <= 2; x++) {
+/*        for (int x = 0; x <= 2; x++) {
             try {
-                Locator purposeofACCOUNT = PlaywrightGenerics.page.locator
-                        ("kycDiv:occupationDetailsDiv:purposeOfAccountDiv:customer.kycDetailsBean.occupationDetail.purposeOfAccount");
+                Locator purposeofACCOUNT = playwrightGenerics.page.locator
+                        ("#ida3");
                 purposeofACCOUNT.selectOption(setdropdown.setLabel(""));
             } catch (Exception e) {
-                Locator purposeofACCOUNT = PlaywrightGenerics.page.locator
-                        ("kycDiv:occupationDetailsDiv:purposeOfAccountDiv:customer.kycDetailsBean.occupationDetail.purposeOfAccount");
-                purposeofACCOUNT.selectOption(setdropdown.setLabel(""));
+
+                e.printStackTrace();
+
             }
-        }
+        }*/
 
-        Locator beneficialAccount = PlaywrightGenerics.page
-                .locator("kycDiv:beneficialOwnerStatusDiv:isBeneficialAccountOwnerDiv:customer.kycDetailsBean.beneficialOwnerStatus.isBeneficialAccountOwner");
-        beneficialAccount.selectOption(setdropdown.setLabel(""));
+        Locator beneficialAccount = playwrightGenerics.page
+                .locator("#ida5");
+        beneficialAccount.selectOption(setdropdown.setLabel("Yes"));
 
-        Locator TxnMode = PlaywrightGenerics.page.locator
-                ("kycDiv:modeOfTransactionDiv:customer.kycDetailsBean.modeOfTransaction.modeOfTransaction");
-        TxnMode.selectOption(setdropdown.setLabel(""));
+        Locator TxnMode = playwrightGenerics.page.locator
+                ("#modeOfTransaction");
+        TxnMode.selectOption(setdropdown.setLabel("All"));
 
-        PlaywrightGenerics.page.locator("#expectedCredit").fill("");
-        PlaywrightGenerics.page.locator("#expectedCredit").fill(ExpextedMonthlyNoTransactionCR);
+        playwrightGenerics.page.locator("#expectedCredit").fill("");
+        playwrightGenerics.page.locator("#expectedCredit").fill(ExpextedMonthlyNoTransactionCR);
         //Assert.assertTrue(ExpextedMonthlyNoTransactionCR.matches("^[0-9]{1,12}$"));
 
-        PlaywrightGenerics.page.locator("#monthlyExpectedWithdrawal").fill("");
-        PlaywrightGenerics.page.locator("#monthlyExpectedWithdrawal").fill(ExpextedMonthlyAmtTransactionCR);
+        playwrightGenerics.page.locator("#monthlyExpectedWithdrawal").fill("");
+        playwrightGenerics.page.locator("#monthlyExpectedWithdrawal").fill(ExpextedMonthlyAmtTransactionCR);
         //Assert.assertTrue(ExpextedMonthlyNoTransactionCR.matches("^[0-9]{1,12}$"));
 
-        PlaywrightGenerics.page.locator("#expectedDebit").fill("");
-        PlaywrightGenerics.page.locator("#expectedDebit").fill(ExpextedMonthlyAmtTransactionDB);
+        playwrightGenerics.page.locator("#expectedDebit").fill("");
+        playwrightGenerics.page.locator("#expectedDebit").fill(ExpextedMonthlyAmtTransactionDB);
         //Assert.assertTrue(ExpextedMonthlyNoTransactionCR.matches("^[0-9]{1,12}$"));
 
-        PlaywrightGenerics.page.locator("#monthlyExpectedDeposit").fill("");
-        PlaywrightGenerics.page.locator("#monthlyExpectedDeposit").fill(ExpextedMonthlyNoTransactionDB);
+        playwrightGenerics.page.locator("#monthlyExpectedDeposit").fill("");
+        playwrightGenerics.page.locator("#monthlyExpectedDeposit").fill(ExpextedMonthlyNoTransactionDB);
         //Assert.assertTrue(ExpextedMonthlyNoTransactionCR.matches("^[0-9]{1,12}$"));
 
-        PlaywrightGenerics.page.locator("#avergaeYearlyIncome").fill("");
-        PlaywrightGenerics.page.locator("#avergaeYearlyIncome").fill(AvgYearlyIncome);
+        playwrightGenerics.page.locator("#avergaeYearlyIncome").fill("");
+        playwrightGenerics.page.locator("#avergaeYearlyIncome").fill(AvgYearlyIncome);
         //Assert.assertTrue(ExpextedMonthlyNoTransactionCR.matches("^[0-9]{1,12}$"));
 
-        PlaywrightGenerics.page.locator("#averageYearlySales").fill("");
-        PlaywrightGenerics.page.locator("#averageYearlySales").fill(AvgYearlySales);
+        playwrightGenerics.page.locator("#averageYearlySales").fill("");
+        playwrightGenerics.page.locator("#averageYearlySales").fill(AvgYearlySales);
         //Assert.assertTrue(ExpextedMonthlyNoTransactionCR.matches("^[0-9]{1,12}$"));
 
-        PlaywrightGenerics.page.locator("#ntn").fill("");
-        PlaywrightGenerics.page.locator("#ntn").fill(ntn);
+        playwrightGenerics.page.locator("#ntn").fill("");
+        playwrightGenerics.page.locator("#ntn").fill(ntn);
 
-        Locator TypeOfCustomer = PlaywrightGenerics.page
-                .locator("kycDiv:informationDiv:typeOfIncomingCustomerDiv:customer.kycDetailsBean.information.typeOfIncomingCustomer");
-        TypeOfCustomer.selectOption(setdropdown.setLabel(""));
+        Locator TypeOfCustomer = playwrightGenerics.page
+                .locator("#typeOfIncomingCustomer");
+        TypeOfCustomer.selectOption(setdropdown.setLabel("Marketed"));
 
-        Locator HearingMedium = PlaywrightGenerics.page
-                .locator("kycDiv:informationDiv:bankHearingMediumDiv:customer.kycDetailsBean.information.bankHearingMedium");
-        HearingMedium.selectOption(setdropdown.setLabel(""));
+        Locator HearingMedium = playwrightGenerics.page
+                .locator("#bankHearingMedium");
+        HearingMedium.selectOption(setdropdown.setLabel("Others"));
 
         //RISK TYPES
         Utility.riskTypes();
 
         //RESIDENCE STATUS//
 
-        Locator ResidenceStatus = PlaywrightGenerics.page
-                .locator("kycDiv:residenceStatusDiv:customer.kycDetailsBean.residenceStatus.residentOrNot");
-        ResidenceStatus.selectOption(setdropdown.setLabel(""));
+        Locator ResidenceStatus = playwrightGenerics.page
+                .locator("#residenceStatus");
+        ResidenceStatus.selectOption(setdropdown.setLabel("Residential"));
 
 //		// CRS
 
-        Locator CountryOfBirth = PlaywrightGenerics.page
-                .locator("kycDiv:crsDiv:crsIndividual:countryOfBirthDiv:customer.kycDetailsBean.crsBean.countryOfBirth");
-        CountryOfBirth.selectOption(setdropdown.setLabel(""));
+        Locator CountryOfBirth = playwrightGenerics.page
+                .locator("#idac");
+        CountryOfBirth.selectOption(setdropdown.setLabel("AFGHANISTAN"));
 
-        Locator TaxIsResident = PlaywrightGenerics.page
-                .locator("kycDiv:crsDiv:crsIndividual:customer.kycDetailsBean.crsBean.isTaxResident");
-        TaxIsResident.selectOption(setdropdown.setLabel(""));
+        Locator TaxIsResident = playwrightGenerics.page
+                .locator("#id87");
+        TaxIsResident.selectOption(setdropdown.setLabel("Yes"));
 
         if (TaxIsResident.textContent().equalsIgnoreCase("No")) {
-            Locator TaxResidenceCountry = PlaywrightGenerics.page.locator("#idae");
+            Locator TaxResidenceCountry = playwrightGenerics.page.locator("#idae");
             TaxResidenceCountry.selectOption(setdropdown.setLabel(""));
 
-            PlaywrightGenerics.page.locator("#idaf").fill(TaxIdentificationNumber);
+            playwrightGenerics.page.locator("#idaf").fill(TaxIdentificationNumber);
 
 			/*Select Reason = new Select(driver.findElement(By.id("id94")));
 			Reason.selectByVisibleText("Reason C");	*/
@@ -221,11 +228,11 @@ public class migration {
 
         else {
 
-            ElementHandle UsPerson = (ElementHandle) PlaywrightGenerics.page.locator("kycDiv:fatcaDiv:fatcaIndividual:customer.kycDetailsBean.fatca");
+            Locator UsPerson = playwrightGenerics.page.locator("#idb1");
             UsPerson.click();
         }
 
-        PlaywrightGenerics.page.locator("//*[@name='update']").click();
+        playwrightGenerics.page.locator("//*[@name='update']").click();
 
         return true;
 
@@ -243,10 +250,10 @@ public class migration {
     public boolean toGuest(String accNumber, String newcustomerType) throws InterruptedException {
 
 
-        PlaywrightGenerics.page.locator("//*[@id='msisdn']").fill(accNumber);
+        playwrightGenerics.page.locator("//*[@id='msisdn']").fill(accNumber);
         // driver.findElement(By.id("displayName")).sendKeys("ajhabdc");
-        PlaywrightGenerics.page.locator("#id7").click();
-        PlaywrightGenerics.page.locator("/html/body/div/div[3]/div[4]/div/div[2]/div/div/form/div[5]/div/table/tbody/tr/td[1]/a/div")
+        playwrightGenerics.page.locator("#id7").click();
+        playwrightGenerics.page.locator("/html/body/div/div[3]/div[4]/div/div[2]/div/div/form/div[5]/div/table/tbody/tr/td[1]/a/div")
                 .click();
 
         try {
@@ -271,27 +278,27 @@ public class migration {
 
             System.out.println("HI ABSAR MUJADDIDI IS TESTING MIGRATION MODULE - GUEST TYPE MMIGRATION!!!!");
 
-            PlaywrightGenerics.page.wait(1000);
+            playwrightGenerics.page.wait(1000);
             System.out.println("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-            Locator st = PlaywrightGenerics.page.locator("#blackListReason");
+            Locator st = playwrightGenerics.page.locator("#blackListReason");
             st.selectOption(setdropdown.setLabel(""));
 
             //	driver.findElement(By.id("motherName")).sendKeys("ASGHAR AFHAN");
-            PlaywrightGenerics.page.locator("#permanentCity").fill("LAHORE");
-            Locator permanentProvince = PlaywrightGenerics.page
+            playwrightGenerics.page.locator("#permanentCity").fill("LAHORE");
+            Locator permanentProvince = playwrightGenerics.page
                     .locator("contactInfoDiv:addressDiv:permanentAddressDiv:customer.address.permanentState");
             permanentProvince.selectOption(setdropdown.setLabel(""));
-            PlaywrightGenerics.page.locator("//*[@id='ida3']").click();
+            playwrightGenerics.page.locator("//*[@id='ida3']").click();
         } catch (Exception e) {
 
-            PlaywrightGenerics.page.locator("#motherName").fill("ASGHAR AFHAN");
-            PlaywrightGenerics.page.locator("#permanentCity").fill("LAHORE");
-            Locator permanentProvince = PlaywrightGenerics.page
+            playwrightGenerics.page.locator("#motherName").fill("ASGHAR AFHAN");
+            playwrightGenerics.page.locator("#permanentCity").fill("LAHORE");
+            Locator permanentProvince = playwrightGenerics.page
                     .locator("contactInfoDiv:addressDiv:permanentAddressDiv:customer.address.permanentState");
             permanentProvince.selectOption(setdropdown.setLabel(""));
 
-            PlaywrightGenerics.page.locator("//*[@id='ida3']").click();
+            playwrightGenerics.page.locator("//*[@id='ida3']").click();
 
 
         }
@@ -319,10 +326,10 @@ public class migration {
 
         try {
 
-            PlaywrightGenerics.page.locator("//*[@id='msisdn']").fill(accNumber);
+            playwrightGenerics.page.locator("//*[@id='msisdn']").fill(accNumber);
             // driver.findElement(By.id("displayName")).sendKeys("ajhabdc");
-            PlaywrightGenerics.page.locator("#id7").fill("");
-            PlaywrightGenerics.page.locator("/html/body/div/div[3]/div[4]/div/div[2]/div/div/form/div[5]/div/table/tbody/tr/td[1]/a/div").click();
+            playwrightGenerics.page.locator("#id7").fill("");
+            playwrightGenerics.page.locator("/html/body/div/div[3]/div[4]/div/div[2]/div/div/form/div[5]/div/table/tbody/tr/td[1]/a/div").click();
         } catch (Exception e) {
             System.out.println("ex message: " + e.getMessage());
 
@@ -335,7 +342,7 @@ public class migration {
             migrationCommons.commons(newcustomerType);
         }
 
-        PlaywrightGenerics.page.wait(1000);
+        playwrightGenerics.page.wait(1000);
 
         if (newcustomerType.equalsIgnoreCase("Corporate Account Master Wallet")) { //IF STARTED
             customertoCorporateTypes(accNumber, accountTitle,
@@ -391,20 +398,20 @@ public class migration {
 	    			 natureOfBusiness,  noTinComments,  newcustomerType);
 			*/
 
-            PlaywrightGenerics.page.locator("#permanentCity").fill("LAHORE");
-            Locator permanentProvince = PlaywrightGenerics.page
+            playwrightGenerics.page.locator("#permanentCity").fill("LAHORE");
+            Locator permanentProvince = playwrightGenerics.page
                     .locator("contactInfoDiv:addressDiv:permanentAddressDiv:customer.address.permanentState");
             permanentProvince.selectOption(setdropdown.setLabel(""));
 
-            PlaywrightGenerics.page.locator("#workingWithOtherBank").fill("NO");
-            PlaywrightGenerics.page.locator("#netWorth").fill("60000");
-            PlaywrightGenerics.page.locator("#typeOfTransaction").fill("Business");
-            PlaywrightGenerics.page.locator("#currentBusinessSince").fill("2000");
-            Locator premises = PlaywrightGenerics.page.locator("#premises");
+            playwrightGenerics.page.locator("#workingWithOtherBank").fill("NO");
+            playwrightGenerics.page.locator("#netWorth").fill("60000");
+            playwrightGenerics.page.locator("#typeOfTransaction").fill("Business");
+            playwrightGenerics.page.locator("#currentBusinessSince").fill("2000");
+            Locator premises = playwrightGenerics.page.locator("#premises");
 
             premises.selectOption(setdropdown.setLabel(""));
 
-            PlaywrightGenerics.page.locator("update").click();
+            playwrightGenerics.page.locator("update").click();
 
 
         } else if (newcustomerType.equalsIgnoreCase("Agent Finca")) {
@@ -451,62 +458,62 @@ public class migration {
 
         //driver.findElement(By.id("sellerCode")).sendKeys(sellerCODE);
 
-        Locator typeAccount = PlaywrightGenerics.page
+        Locator typeAccount = playwrightGenerics.page
                 .locator("generalInformationDiv:accountTypeDiv:customer.address.typeOfAccount");
         typeAccount.selectOption(setdropdown.setLabel(""));
 
-        Locator nationality = PlaywrightGenerics.page
+        Locator nationality = playwrightGenerics.page
                 .locator("personalDetailDiv:nationalityDiv:customer.kycDetailsBean.generalInfo.nationality");
         nationality.selectOption(setdropdown.setLabel(""));
 
         //	driver.findElement(By.id("id4")).sendKeys(accountTitle);
         //	Assert.assertTrue(accountTitle.matches("^[a-zA-Z\\s]*$"));
 
-        PlaywrightGenerics.page.locator("#nameAsPerCnic").fill(nameCnic);
+        playwrightGenerics.page.locator("#nameAsPerCnic").fill(nameCnic);
         //Assert.assertTrue(NameCnic.matches("^(?=.*[1-9])[0-9+]{5}(-){1}[0-9+]{7}(-){1}[0-9]{1}$"));
 
-        PlaywrightGenerics.page.locator("#motherName").fill(motherName);
+        playwrightGenerics.page.locator("#motherName").fill(motherName);
         //Assert.assertTrue(motherName.matches("^[a-zA-Z\\s]*$"));
 
-        PlaywrightGenerics.page.locator("#fatherHusbandName").fill(fatherName);
+        playwrightGenerics.page.locator("#fatherHusbandName").fill(fatherName);
         //Assert.assertTrue(FatherName.matches("^[a-zA-Z\\s]*$"));
 
-        PlaywrightGenerics.page.locator("#placeOfBirth").fill(placeofBirth);
+        playwrightGenerics.page.locator("#placeOfBirth").fill(placeofBirth);
 
-        PlaywrightGenerics.page.locator("#permanentCity").fill("LAHORE");
+        playwrightGenerics.page.locator("#permanentCity").fill("LAHORE");
 
-        Locator permanentProvince = PlaywrightGenerics.page.locator("contactInfoDiv:addressDiv:permanentAddressDiv:customer.address.permanentState");
+        Locator permanentProvince = playwrightGenerics.page.locator("contactInfoDiv:addressDiv:permanentAddressDiv:customer.address.permanentState");
         permanentProvince.selectOption(setdropdown.setLabel(""));
 
-        PlaywrightGenerics.page.locator("#permanentAddress").fill(permanentAddress);
+        playwrightGenerics.page.locator("#permanentAddress").fill(permanentAddress);
         //driver..findElement(By.id("permanentCity")).sendKeys(PermanentCity);
 
        /* DesiredCapabilities dc = new DesiredCapabilities();
         dc.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 */
-        PlaywrightGenerics.page.locator("#mailingOrBusinessAddress").fill(mailingAddress);
+        playwrightGenerics.page.locator("#mailingOrBusinessAddress").fill(mailingAddress);
 
         // dc.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
 
-        PlaywrightGenerics.page.locator("#mailingOrBusinessCity").fill(mailingCity);
+        playwrightGenerics.page.locator("#mailingOrBusinessCity").fill(mailingCity);
 
         //driver.findElement(By.id("email")).sendKeys(email);
 
-        Locator pOA = PlaywrightGenerics.page
+        Locator pOA = playwrightGenerics.page
                 .locator("kycDiv:occupationDetailsDiv:purposeOfAccountDiv:customer.kycDetailsBean.occupationDetail.purposeOfAccount");
         pOA.selectOption(setdropdown.setLabel(""));
 
-        PlaywrightGenerics.page.locator("#accountHolderMsisdn").fill(accountHolderMN);
+        playwrightGenerics.page.locator("#accountHolderMsisdn").fill(accountHolderMN);
 
-        Locator province = PlaywrightGenerics.page.locator("#permanentState");
+        Locator province = playwrightGenerics.page.locator("#permanentState");
         province.selectOption(setdropdown.setLabel(""));
 
-        Locator MailingProvince = PlaywrightGenerics.page
+        Locator MailingProvince = playwrightGenerics.page
                 .locator("contactInfoDiv:addressDiv:mailingOrBusinessAddressDiv:customer.address.mailingOrBusinessState");
         MailingProvince.selectOption(setdropdown.setLabel(""));
 
 
-        Locator BeneficialAccOwner = PlaywrightGenerics.page
+        Locator BeneficialAccOwner = playwrightGenerics.page
                 .locator("kycDiv:beneficialOwnerStatusDiv:isBeneficialAccountOwnerDiv:customer.kycDetailsBean.beneficialOwnerStatus.isBeneficialAccountOwner");
         BeneficialAccOwner.selectOption(setdropdown.setLabel(""));
 
@@ -517,95 +524,95 @@ public class migration {
 
         //driver.findElement(By.id("cnicBeneficial")).sendKeys(beneficialCnic);
 
-        Locator TxnMode = PlaywrightGenerics.page.locator("#modeOfTransaction");
+        Locator TxnMode = playwrightGenerics.page.locator("#modeOfTransaction");
         TxnMode.selectOption(setdropdown.setLabel(""));
 
-        Locator exCredit = PlaywrightGenerics.page.locator("#expectedCredit");
+        Locator exCredit = playwrightGenerics.page.locator("#expectedCredit");
         exCredit.fill(expectedCredit);
 
-        Locator monExWithdrawal = PlaywrightGenerics.page.locator("#expectedCredit");
+        Locator monExWithdrawal = playwrightGenerics.page.locator("#expectedCredit");
         monExWithdrawal.fill(monthlyExpectedWithdrawal);
 
-        Locator exDebit = PlaywrightGenerics.page.locator("#expectedDebit");
+        Locator exDebit = playwrightGenerics.page.locator("#expectedDebit");
         exDebit.fill(expectedDebit);
 
-        Locator monExDeposit = PlaywrightGenerics.page.locator("#monthlyExpectedDeposit");
+        Locator monExDeposit = playwrightGenerics.page.locator("#monthlyExpectedDeposit");
         monExDeposit.fill((monthlyExpectedDeposit));
 
-        Locator avgYearIncome = PlaywrightGenerics.page.locator("#avergaeYearlyIncome");
+        Locator avgYearIncome = playwrightGenerics.page.locator("#avergaeYearlyIncome");
         avgYearIncome.fill(avergaeYearlyIncome);
 
-        Locator avgYearlySales = PlaywrightGenerics.page.locator("#averageYearlySales");
+        Locator avgYearlySales = playwrightGenerics.page.locator("#averageYearlySales");
         avgYearlySales.fill(averageYearlySales);
 
-        Locator exThroughput = PlaywrightGenerics.page.locator("#expectedMonthlyThroughPut");
+        Locator exThroughput = playwrightGenerics.page.locator("#expectedMonthlyThroughPut");
         exThroughput.fill(expectedMonthlyThroughPut);
 
-        Locator exAvgBalance = PlaywrightGenerics.page.locator("#expectedAvgBalance");
+        Locator exAvgBalance = playwrightGenerics.page.locator("#expectedAvgBalance");
         exAvgBalance.fill(expectedAvgBalance);
-        Locator exMonCrSales = PlaywrightGenerics.page.locator("#expectedMonthlyCreditSales");
+        Locator exMonCrSales = playwrightGenerics.page.locator("#expectedMonthlyCreditSales");
         exMonCrSales.fill(expectedMonthlyCreditSales);
 
-        Locator exMaxAmtTransaction = PlaywrightGenerics.page.locator("#expectedMaxAmountPerTransaction");
+        Locator exMaxAmtTransaction = playwrightGenerics.page.locator("#expectedMaxAmountPerTransaction");
         exMaxAmtTransaction.fill(expectedMaxAmountPerTransaction);
 
-        Locator exNoTransaction = PlaywrightGenerics.page.locator("#expectedNoOfTransaction");
+        Locator exNoTransaction = playwrightGenerics.page.locator("#expectedNoOfTransaction");
         exNoTransaction.fill(expectedNoOfTransaction);
 
-        Locator annualTurnOver = PlaywrightGenerics.page.locator("#annualTurnover");
+        Locator annualTurnOver = playwrightGenerics.page.locator("#annualTurnover");
         annualTurnOver.fill(annualTurnover);
 
-        Locator natureBusiness = PlaywrightGenerics.page.locator("#natureOfBusiness");
+        Locator natureBusiness = playwrightGenerics.page.locator("#natureOfBusiness");
         natureBusiness.fill(natureOfBusiness);
 
-        Locator business = PlaywrightGenerics.page.locator("#sourcesOfIncomeOther");
+        Locator business = playwrightGenerics.page.locator("#sourcesOfIncomeOther");
         business.fill("Business");
 
-        Locator businessType = PlaywrightGenerics.page.locator("#typeOfBusiness");
+        Locator businessType = playwrightGenerics.page.locator("#typeOfBusiness");
         businessType.selectOption(setdropdown.setLabel("Service"));
 
-        Locator notinComments = PlaywrightGenerics.page.locator("#noTinComments");
+        Locator notinComments = playwrightGenerics.page.locator("#noTinComments");
         notinComments.fill(noTinComments);
 
         Utility.riskTypes();
 
-        Locator CountryOfBirth = PlaywrightGenerics.page
+        Locator CountryOfBirth = playwrightGenerics.page
                 .locator("kycDiv:crsDiv:crsIndividual:countryOfBirthDiv:customer.kycDetailsBean.crsBean.countryOfBirth");
         CountryOfBirth.selectOption(setdropdown.setLabel(""));
 
 
-        Locator TaxResidentYN = PlaywrightGenerics.page
+        Locator TaxResidentYN = playwrightGenerics.page
                 .locator("kycDiv:crsDiv:crsIndividual:customer.kycDetailsBean.crsBean.isTaxResident");
         TaxResidentYN.selectOption(setdropdown.setLabel(""));
 
-        ElementHandle UsPerson = (ElementHandle) PlaywrightGenerics.page.locator("kycDiv:fatcaDiv:fatcaIndividual:customer.kycDetailsBean.fatca");
+        ElementHandle UsPerson = (ElementHandle) playwrightGenerics.page.locator("kycDiv:fatcaDiv:fatcaIndividual:customer.kycDetailsBean.fatca");
         UsPerson.click();
 
         //Utility.Submit(driver.);
 
 
-        PlaywrightGenerics.page.wait(1500);
+        playwrightGenerics.page.wait(1500);
 
         ///////////////////////////////////////
         //////AUTOMATING DIRECTOR'S PAGE///////
         //////////////////////////////////////
 
-        PlaywrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[2]/div/input")
+        playwrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[2]/div/input")
                 .fill("Absar ahmed Mujaddidi");
 
-        PlaywrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[3]/div/input")
+        playwrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[3]/div/input")
                 .fill("lahore rehman gardens");
 
-        Locator ID = PlaywrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[4]/div/select");
+        Locator ID = playwrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[4]/div/select");
         ID.selectOption(setdropdown.setLabel(""));
 
-        PlaywrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[5]/div/input").fill("3001254");
+        playwrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[5]/div/input").fill("3001254");
 
-        Locator residentCountry = PlaywrightGenerics.page
+        Locator residentCountry = playwrightGenerics.page
                 .locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[6]/div/select");
         residentCountry.selectOption(setdropdown.setLabel(""));
 
-        PlaywrightGenerics.page
+        playwrightGenerics.page
                 .locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[2]/div[2]/div[7]/div/input").fill("Lahore");
 
         //////////////////////////////////////////
@@ -624,18 +631,18 @@ public class migration {
     		} */
 
         //for proceeding after adding director//
-        PlaywrightGenerics.page.locator("#idb8").click();
-        PlaywrightGenerics.page.wait(5000);
+        playwrightGenerics.page.locator("#idb8").click();
+        playwrightGenerics.page.wait(5000);
 
         Thread.sleep(250);
         //CLICKING ON CONTINUE BUTTON ON DIRECTOR'S PAGE//
-        PlaywrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[3]/div/input[3]").click();
+        playwrightGenerics.page.locator("/html/body/div[1]/div[3]/div[4]/div/div[2]/div/div/form/div[2]/div[3]/div/input[3]").click();
 
         Thread.sleep(300);
 
         //CLICKING ON CONTINUE BUTTON ON CORPORATE CUSTOMER ONBOARDING PAGE AFTER ADDING DIRECTOR//
-        PlaywrightGenerics.page.locator("/html/body/div/div[3]/div[4]/div/div[2]/div/div/form/div[4]/div/input[1]").click();
-        PlaywrightGenerics.page.locator("//*[@name='update']").click();
+        playwrightGenerics.page.locator("/html/body/div/div[3]/div[4]/div/div[2]/div/div/form/div[4]/div/input[1]").click();
+        playwrightGenerics.page.locator("//*[@name='update']").click();
 
         return true;
 

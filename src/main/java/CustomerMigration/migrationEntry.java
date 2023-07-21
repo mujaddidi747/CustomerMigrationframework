@@ -1,14 +1,14 @@
 package CustomerMigration;
 
-import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Locator;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 public class migrationEntry {
 
-    static ElementHandle sub_menu;
-    static ElementHandle sub_menu1;
+    static Locator submenu;
+    static Locator submenu1;
 
     static Object data[][];
     //ChromeOptions opt = new ChromeOptions();
@@ -31,16 +31,16 @@ public class migrationEntry {
         //opt.addArguments("--headless");
 
         // UseCase1: opening the website
-        PlaywrightGenerics.page.navigate("");
+        playwrightGenerics.page.navigate("");
         //  driver.manage().window().maximize();
 
         // Login Usecase2: Entering Credentials
 
-        PlaywrightGenerics.page.locator("//*[@id='user']").fill("");
-        PlaywrightGenerics.page.locator("//*[@id='password']").fill("");
+        playwrightGenerics.page.locator("//*[@id='user']").fill("");
+        playwrightGenerics.page.locator("//*[@id='password']").fill("");
 
         // clicking on LoginButton after entering credentials
-        PlaywrightGenerics.page
+        playwrightGenerics.page
                 .locator("//*[@id='consumerForm']/li[3]/table/tbody/tr/td[1]/input")
                 .click();
         //Test Common
@@ -49,7 +49,7 @@ public class migrationEntry {
         System.out.println("*** Into the CustomerRegistration ***");
 
 
-        Utility.getActionsObject_submenu_homepage(sub_menu, sub_menu1);
+        Utility.getActionsObject_submenu_homepage( submenu, submenu1);
 
         migration mig = new migration();
 
@@ -75,10 +75,14 @@ public class migrationEntry {
                     dataValues[7], dataValues[8], dataValues[9], dataValues[10], dataValues[11], dataValues[12], dataValues[13]
                     , dataValues[14], dataValues[15], dataValues[16]);
             //driver.findElement(By.name(""))
-        } else if (newcustomerType.equalsIgnoreCase("Guest D/C Block User")) {
+        }
+
+        else if (newcustomerType.equalsIgnoreCase("Guest D/C Block User")) {
 
             mig.toGuest(dataValues[0], dataValues[1]);
-        } else if (newcustomerType.equalsIgnoreCase("Corporate Account Master Wallet")
+        }
+
+        else if (newcustomerType.equalsIgnoreCase("Corporate Account Master Wallet")
                 || newcustomerType.equalsIgnoreCase("Corporate Sim Sim Account User")
                 || newcustomerType.equalsIgnoreCase("Agent FINJA")
                 || newcustomerType.equalsIgnoreCase("Agent Finca")) {

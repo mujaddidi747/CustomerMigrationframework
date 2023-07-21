@@ -10,8 +10,8 @@ public class migrationCommons {
 
         try
         {
-            Locator customer =   PlaywrightGenerics.page.locator("generalInformationDiv:customerTypeDiv:customer.customerTypeId");
-            ElementHandle dropdown_customerRegistration = (ElementHandle) customer;
+            Locator customer =   playwrightGenerics.page.locator("#idb");
+            Locator dropdown_customerRegistration =  customer;
             dropdown_customerRegistration.selectOption(setDropdown.setLabel(newcustomerType));
 
             ////*[@id="idc"]
